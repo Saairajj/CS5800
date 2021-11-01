@@ -1,0 +1,47 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Password for user postgres:
+psql (14.0)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# CREATE DATABASE dbname;
+CREATE DATABASE
+postgres=# CREATE TABLE users (
+postgres(# id INTEGER NOT NULL,
+postgres(# name VARCHAR(40) NOT NULL,
+postgres(# CONSTRAINT users_pk PRIMARY KEY (id)
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE comments (
+postgres(# id INTEGER NOT NULL,
+postgres(# id_user INTEGER NOT NULL,
+postgres(# text VARCHAR(400) NOT NULL,
+postgres(# CONSTRAINT comments_pk PRIMARY KEY (id, id_user)
+postgres(# );
+CREATE TABLE
+postgres=# ALTER TABLE comments ADD CONSTRAINT users_comments_fk
+postgres-# FOREIGN KEY (id_user)
+postgres-# REFERENCES users (id)
+postgres-# ON DELETE NO ACTION
+postgres-# ON UPDATE NO ACTION
+postgres-# NOT DEFERRABLE;
+ALTER TABLE
+postgres=# \l
+                                         List of databases
+   Name    |  Owner   | Encoding |      Collate       |       Ctype        |   Access privileges
+-----------+----------+----------+--------------------+--------------------+-----------------------
+ dbname    | postgres | UTF8     | English_India.1252 | English_India.1252 |
+ postgres  | postgres | UTF8     | English_India.1252 | English_India.1252 |
+ template0 | postgres | UTF8     | English_India.1252 | English_India.1252 | =c/postgres          +
+           |          |          |                    |                    | postgres=CTc/postgres
+ template1 | postgres | UTF8     | English_India.1252 | English_India.1252 | =c/postgres          +
+           |          |          |                    |                    | postgres=CTc/postgres
+(4 rows)
+
+
+postgres=#
